@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  # InfluxDB 2.x — Time-series telemetry store
+  influxdb:
+    image: influxdb:2.7
+    container_name: hydrotrack-influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=hydrotrack2026
+      - DOCKER_INFLUXDB_INIT_ORG=hydrotrack
+      - DOCKER_INFLUXDB_INIT_BUCKET=hydrotrack_telemetry
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=hydrotrack-dev-token
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    networks:
+      - hydrotrack-net
+    healthcheck:
+      test: ["CMD", "influx", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Mosquitto MQTT Broker — HiveMQ stand-in for offline dev
+  # mosquitto:
+  #   image: eclipse-mosquitto:2
+  #   container_name: hydrotrack-mosquitto
+  #   ports:
+  #     - "1883:1883"   # MQTT
+  #     - "9001:9001"   # WebSocket (for frontend MQTT.js)
+  #   volumes:
+  #     - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  #     - mosquitto-data:/mosquitto/data
+  #     - mosquitto-log:/mosquitto/log
+  #   networks:
+  #     - hydrotrack-net
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "mosquitto_sub -t '$$SYS/#' -C 1 -i healthcheck -W 3 || exit 1"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+  # Node.js Express Backend
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: hydrotrack-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=hydrotrack-dev-token
+      - INFLUXDB_ORG=hydrotrack
+      - INFLUXDB_BUCKET=hydrotrack_telemetry
+      - MQTT_BROKER_URL=mqtt://mosquitto:1883
+      - JWT_SECRET=hydrotrack-jwt-secret-change-in-prod
+      - JWT_EXPIRY=24h
+      - PORT=3001
+    depends_on:
+      influxdb:
+        condition: service_healthy
+      # mosquitto:
+      #   condition: service_healthy
+    networks:
+      - hydrotrack-net
+    restart: unless-stopped
+
+  # Vite Frontend Dev Server
+  frontend:
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile
+    container_name: hydrotrack-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3001
+      - VITE_MQTT_URL=ws://localhost:9001
+    depends_on:
+      - backend
+    networks:
+      - hydrotrack-net
+
+volumes:
+  influxdb-data:
+  mosquitto-data:
+  mosquitto-log:
+
+networks:
+  hydrotrack-net:
+    driver: bridge

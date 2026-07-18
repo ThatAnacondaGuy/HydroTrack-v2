@@ -1,0 +1,6 @@
+export const TARGET_150_WARNING_LITERS = 100;
+export const TARGET_150_CRITICAL_LITERS = 150;
+export const THERMAL_HAZARD_CRITICAL_C = 50;
+export const TDS_WATCH_PPM = 250;
+export const TDS_UNSAFE_PPM = 300;
+export const ACOUSTIC_CONFIDENCE_THRESHOLD = 0.75;

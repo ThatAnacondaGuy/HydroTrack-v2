@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thermal Hazard Log | Thermal Sentinel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0B0F14;
+            color: #e0e2ea;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .glass-panel {
+            background: rgba(28, 32, 37, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hazard-pulse {
+            box-shadow: 0 0 0 0 rgba(227, 67, 43, 0.4);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(227, 67, 43, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(227, 67, 43, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(227, 67, 43, 0); }
+        }
+
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#8b919f",
+                      "surface-bright": "#36393f",
+                      "surface-container-lowest": "#0a0e13",
+                      "surface-dim": "#101419",
+                      "tertiary-container": "#fe563c",
+                      "on-surface": "#e0e2ea",
+                      "tertiary": "#ffb4a6",
+                      "on-tertiary-fixed": "#3f0300",
+                      "primary": "#a9c7ff",
+                      "surface-container-high": "#262a30",
+                      "error-container": "#93000a",
+                      "on-secondary": "#442c00",
+                      "on-primary-container": "#002957",
+                      "secondary": "#fcbb4d",
+                      "primary-fixed-dim": "#a9c7ff",
+                      "primary-container": "#3a90ff",
+                      "on-secondary-fixed": "#281800",
+                      "on-tertiary-fixed-variant": "#900d00",
+                      "surface-variant": "#31353b",
+                      "on-error-container": "#ffdad6",
+                      "error": "#ffb4ab",
+                      "on-tertiary-container": "#5a0500",
+                      "tertiary-fixed-dim": "#ffb4a6",
+                      "surface": "#101419",
+                      "on-primary-fixed-variant": "#00468b",
+                      "on-tertiary": "#660700",
+                      "inverse-on-surface": "#2d3136",
+                      "background": "#101419",
+                      "on-secondary-container": "#3b2500",
+                      "on-surface-variant": "#c1c6d6",
+                      "secondary-container": "#bf8619",
+                      "primary-fixed": "#d6e3ff",
+                      "surface-tint": "#a9c7ff",
+                      "on-primary-fixed": "#001b3d",
+                      "on-error": "#690005",
+                      "on-primary": "#003063",
+                      "surface-container-highest": "#31353b",
+                      "secondary-fixed-dim": "#fcbb4d",
+                      "tertiary-fixed": "#ffdad4",
+                      "on-background": "#e0e2ea",
+                      "surface-container-low": "#181c21",
+                      "on-secondary-fixed-variant": "#614000",
+                      "surface-container": "#1c2025",
+                      "inverse-surface": "#e0e2ea",
+                      "inverse-primary": "#005db6",
+                      "secondary-fixed": "#ffddaf",
+                      "outline-variant": "#414753"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "component-padding-sm": "8px",
+                      "container-margin": "24px",
+                      "component-padding-md": "16px",
+                      "gutter": "16px",
+                      "component-padding-xs": "4px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "display-lg-mobile": ["Inter"],
+                      "data-mono-lg": ["JetBrains Mono"],
+                      "label-caps": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "data-mono-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "data-mono-lg": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "data-mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface custom-scrollbar overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface-container-high backdrop-blur-md border-b border-white/10 shadow-sm">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-md text-headline-md font-extrabold text-primary">Thermal Sentinel</h1>
+<nav class="hidden md:flex gap-6">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Status Monitor</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">System Health</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a male command operator in a dark blue uniform, with a high-tech control room environment blurred in the background. The lighting is cool-toned, accentuating a sharp, authoritative look. Cinematic quality, focused and clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj0e_v17nldmuojMxRzd4jRK3iShnnyz6nqmgOlmTIbWKhNSGv2OlT-sMod4hn7IlNAFmk9E5ehdskxYscypCgzEj4Umz0RKVGjrplf_rx3A79W-YEY171pWN_kvTpYjqZnknMUuthAhTl6U7FcR-GSSR0uaf6Fbcy0r8e_IgXovnXCugh0i7u5_O2X0P_C72xs32kUsojTcDjsf7NF74Lr-KzMz4USkWm9vEwlxTuVTMRY-2VR-yW"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container backdrop-blur-xl border-r border-white/5 flex flex-col z-40">
+<div class="p-6 border-b border-white/5">
+<h2 class="font-headline-md text-headline-md text-on-surface">Command Center</h2>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-60">Thermal Division</p>
+</div>
+<nav class="flex-1 py-4">
+<ul class="space-y-1 px-3">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 rounded transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 rounded transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-caps text-label-caps">GIS Heatmap</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-primary bg-primary-container/20 border-r-4 border-primary scale-95 duration-150 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-caps text-label-caps">Hazard Log</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 rounded transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/5 rounded transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">Audit Trail</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-4 border-t border-white/5">
+<button class="w-full bg-tertiary-container text-on-tertiary-container py-2 rounded font-label-caps text-label-caps uppercase tracking-widest hover:opacity-90 transition-opacity">
+                Emergency Protocol
+            </button>
+<ul class="mt-4 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 mt-16 p-container-margin min-h-screen">
+<!-- Page Header -->
+<header class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Thermal Hazard Log</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">warning</span>
+                    Scalding Risk Threshold: <span class="mono-text font-bold text-secondary">&gt;50°C</span>
+</p>
+</div>
+<div class="flex items-center gap-3 bg-error-container/20 border border-error/30 px-4 py-2 rounded hazard-pulse">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-error"></span>
+</span>
+<span class="font-label-caps text-label-caps text-error font-bold">2 ACTIVE HAZARDS</span>
+</div>
+</header>
+<!-- Active Hazards Panel -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-8">
+<!-- Hazard Card 1 -->
+<div class="glass-panel p-component-padding-md border-l-4 border-l-[#E3432B] relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">local_fire_department</span>
+</div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">DEVICE IDENTIFIER</span>
+<h3 class="font-data-mono-lg text-data-mono-lg text-primary">HT-88C1</h3>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">LOCATION</span>
+<h3 class="font-body-md text-body-md text-on-surface">Ward 12 - Kothrud</h3>
+</div>
+</div>
+<div class="mb-6">
+<span class="font-label-caps text-label-caps text-error/80 block mb-1">CURRENT PEAK TELEMETRY</span>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-bold mono-text text-[#E3432B]">58.4°C</span>
+<span class="material-symbols-outlined text-error animate-bounce">stat_3</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-error text-white font-label-caps text-label-caps py-3 rounded-sm hover:brightness-110 transition-all">
+                        Acknowledge Breach
+                    </button>
+<button class="px-4 border border-white/10 hover:bg-white/5 transition-all rounded-sm">
+<span class="material-symbols-outlined text-on-surface-variant">map</span>
+</button>
+</div>
+</div>
+<!-- Hazard Card 2 -->
+<div class="glass-panel p-component-padding-md border-l-4 border-l-[#E3432B] relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">local_fire_department</span>
+</div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">DEVICE IDENTIFIER</span>
+<h3 class="font-data-mono-lg text-data-mono-lg text-primary">HT-2B77</h3>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">LOCATION</span>
+<h3 class="font-body-md text-body-md text-on-surface">Ward 5 - Shivajinagar</h3>
+</div>
+</div>
+<div class="mb-6">
+<span class="font-label-caps text-label-caps text-error/80 block mb-1">CURRENT PEAK TELEMETRY</span>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-bold mono-text text-[#E3432B]">53.1°C</span>
+<span class="material-symbols-outlined text-error animate-bounce">stat_3</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-error text-white font-label-caps text-label-caps py-3 rounded-sm hover:brightness-110 transition-all">
+                        Acknowledge Breach
+                    </button>
+<button class="px-4 border border-white/10 hover:bg-white/5 transition-all rounded-sm">
+<span class="material-symbols-outlined text-on-surface-variant">map</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Summary Stat Strip -->
+<div class="flex flex-wrap gap-4 mb-8">
+<div class="flex-1 min-w-[200px] glass-panel p-3 flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">event_repeat</span>
+</div>
+<div>
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase tracking-tighter">Total Incidents (30d)</span>
+<p class="font-data-mono-lg text-data-mono-lg text-on-surface">24</p>
+</div>
+</div>
+<div class="flex-1 min-w-[200px] glass-panel p-3 flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">thermostat</span>
+</div>
+<div>
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase tracking-tighter">Avg Peak Temp</span>
+<p class="font-data-mono-lg text-data-mono-lg text-on-surface">54.2°C</p>
+</div>
+</div>
+<div class="flex-1 min-w-[200px] glass-panel p-3 flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">priority_high</span>
+</div>
+<div>
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase tracking-tighter">Repeat Offenders</span>
+<p class="font-data-mono-lg text-data-mono-lg text-secondary">3</p>
+</div>
+</div>
+</div>
+<!-- Incident History Table -->
+<div class="glass-panel overflow-hidden border border-white/5">
+<div class="p-4 border-b border-white/5 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">INCIDENT RESOLUTION HISTORY</h3>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-sm text-on-surface-variant">search</span>
+<input class="bg-surface-container-lowest border-white/5 rounded text-[12px] pl-8 pr-3 py-1 text-on-surface focus:ring-1 focus:ring-primary w-48" placeholder="Filter Device ID..." type="text"/>
+</div>
+<button class="bg-white/5 px-3 py-1 rounded text-[12px] font-label-caps text-on-surface-variant hover:bg-white/10 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                        Filter
+                    </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white/[0.02]">
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70">DEVICE ID</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70">ZONE / WARD</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70 text-right">PEAK TEMP</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70">DETECTED AT</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70">DURATION</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70">STATUS</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-on-surface-variant opacity-70 text-center">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<!-- Active Row 1 -->
+<tr class="bg-error/5 hover:bg-error/10 transition-colors">
+<td class="px-4 py-3 mono-text text-error font-bold">HT-88C1</td>
+<td class="px-4 py-3 text-body-md">Kothrud, Sect-4</td>
+<td class="px-4 py-3 mono-text text-right text-error">58.4°C</td>
+<td class="px-4 py-3 text-body-md opacity-80">Today, 14:22</td>
+<td class="px-4 py-3 text-body-md opacity-80">14m 20s</td>
+<td class="px-4 py-3">
+<span class="bg-error/20 text-error px-2 py-0.5 rounded-full text-[10px] font-bold border border-error/30 uppercase tracking-wider">Breaching</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-primary hover:underline text-xs font-label-caps">Details</button>
+</td>
+</tr>
+<!-- Active Row 2 -->
+<tr class="bg-error/5 hover:bg-error/10 transition-colors">
+<td class="px-4 py-3 mono-text text-error font-bold">HT-2B77</td>
+<td class="px-4 py-3 text-body-md">Shivajinagar, West</td>
+<td class="px-4 py-3 mono-text text-right text-error">53.1°C</td>
+<td class="px-4 py-3 text-body-md opacity-80">Today, 14:15</td>
+<td class="px-4 py-3 text-body-md opacity-80">21m 05s</td>
+<td class="px-4 py-3">
+<span class="bg-error/20 text-error px-2 py-0.5 rounded-full text-[10px] font-bold border border-error/30 uppercase tracking-wider">Breaching</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-primary hover:underline text-xs font-label-caps">Details</button>
+</td>
+</tr>
+<!-- Resolved Rows -->
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-11A0</td>
+<td class="px-4 py-3 text-body-md">Baner, High St.</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">51.2°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Yesterday, 18:40</td>
+<td class="px-4 py-3 text-body-md opacity-60">08m 12s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-99X2</td>
+<td class="px-4 py-3 text-body-md">Hadapsar, IT Park</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">55.9°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Yesterday, 16:11</td>
+<td class="px-4 py-3 text-body-md opacity-60">34m 50s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-44E9</td>
+<td class="px-4 py-3 text-body-md">Viman Nagar</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">52.4°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Yesterday, 09:22</td>
+<td class="px-4 py-3 text-body-md opacity-60">12m 00s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-03Q1</td>
+<td class="px-4 py-3 text-body-md">Aundh, West</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">50.8°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Oct 24, 21:05</td>
+<td class="px-4 py-3 text-body-md opacity-60">04m 15s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-88C1</td>
+<td class="px-4 py-3 text-body-md">Kothrud, Sect-4</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">54.1°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Oct 24, 15:44</td>
+<td class="px-4 py-3 text-body-md opacity-60">19m 33s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-22M1</td>
+<td class="px-4 py-3 text-body-md">Kharadi</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">50.1°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Oct 23, 11:30</td>
+<td class="px-4 py-3 text-body-md opacity-60">02m 45s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-67L4</td>
+<td class="px-4 py-3 text-body-md">Pimple Saudagar</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">53.7°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Oct 23, 08:02</td>
+<td class="px-4 py-3 text-body-md opacity-60">15m 12s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-4 py-3 mono-text text-on-surface-variant">HT-33K9</td>
+<td class="px-4 py-3 text-body-md">Warje, Malwadi</td>
+<td class="px-4 py-3 mono-text text-right text-on-surface opacity-80">51.9°C</td>
+<td class="px-4 py-3 text-body-md opacity-60">Oct 22, 19:44</td>
+<td class="px-4 py-3 text-body-md opacity-60">07m 22s</td>
+<td class="px-4 py-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary/20 uppercase tracking-wider">Resolved</span>
+</td>
+<td class="px-4 py-3 text-center">
+<button class="text-on-surface-variant hover:text-primary text-xs font-label-caps">Archive</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-white/5 flex justify-between items-center bg-white/[0.01]">
+<span class="text-[12px] text-on-surface-variant opacity-60">Displaying 10 of 142 total incidents</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-white/10 hover:bg-white/5">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-white/10 bg-primary/20 text-primary font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-white/10 hover:bg-white/5 text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-white/10 hover:bg-white/5 text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-white/10 hover:bg-white/5">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for acknowledge buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simulating telemetry updates
+        setInterval(() => {
+            const temps = document.querySelectorAll('.mono-text.text-error');
+            temps.forEach(temp => {
+                const current = parseFloat(temp.innerText);
+                const noise = (Math.random() - 0.5) * 0.2;
+                temp.innerText = (current + noise).toFixed(1) + '°C';
+            });
+        }, 3000);
+    </script>
+</body></html>

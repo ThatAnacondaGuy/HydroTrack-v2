@@ -1,0 +1,521 @@
+<!DOCTYPE html><html lang="en" class="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "primary": "#a9c7ff",
+                "on-primary": "#003063",
+                "primary-container": "#2D8CFF",
+                "on-primary-container": "#002957",
+                "secondary": "#fcbb4d",
+                "on-secondary": "#442c00",
+                "tertiary": "#ffb4a6",
+                "error": "#E3432B",
+                "warning": "#E8A93D",
+                "surface": "#0B0F14",
+                "surface-container-low": "#181c21",
+                "surface-container-high": "#262a30",
+                "on-surface": "#e0e2ea",
+                "on-surface-variant": "#c1c6d6",
+                "outline": "#8b919f",
+                "outline-variant": "#414753"
+              },
+              "fontFamily": {
+                "display-lg": ["Inter"],
+                "data-mono-sm": ["JetBrains Mono"],
+                "headline-md": ["Inter"],
+                "body-md": ["Inter"],
+                "label-caps": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    }catch(_e){}</script><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap" data-snapdom="injected-import"></head><body class="flex flex-col h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-surface-dim/80 backdrop-blur-xl border-b border-white/10 z-50 flex justify-between items-center px-6">
+<div class="flex items-center gap-8">
+<span class="font-bold text-xl text-primary tracking-tighter uppercase">AQUAGUARD OPS</span>
+<div class="hidden md:flex relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input type="text" placeholder="Search Device ID, Zone..." class="bg-surface-container-low border border-outline-variant rounded px-10 py-1.5 text-sm w-80 focus:outline-none focus:border-primary transition-all">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-white/5 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-original-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-white/5 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="flex items-center gap-3 pl-2 border-l border-white/10 ml-2 cursor-pointer active:scale-95 transition-transform">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface">P. Kulkarni</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Chief Engineer</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 border border-primary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-16 h-full overflow-hidden">
+<!-- SideNavBar -->
+<nav class="w-64 bg-surface-container-low/90 backdrop-blur-lg border-r border-white/10 flex flex-col h-full z-40">
+<div class="p-6">
+<div class="mb-8">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant opacity-60 mb-2">CONTROL CENTER</h3>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs font-bold text-on-surface">Sector 7G - Active</span>
+</div>
+</div>
+<div class="space-y-1">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all group">
+<span class="material-symbols-outlined text-lg">map</span>
+<span class="font-label-caps text-label-caps">GIS MAPPING</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 bg-primary-container/20 text-primary border-l-4 border-primary transition-all">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">settings_input_component</span>
+<span class="font-label-caps text-label-caps">ACOUSTIC LEDGER</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-lg">water_drop</span>
+<span class="font-label-caps text-label-caps">WATER QUALITY</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="font-label-caps text-label-caps">SYSTEM STATUS</span>
+</a>
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined text-lg">assessment</span>
+<span class="font-label-caps text-label-caps">REPORTS</span>
+</a>
+</div>
+</div>
+<div class="mt-auto p-6 space-y-4">
+<button class="w-full py-3 bg-error/10 hover:bg-error/20 text-error border border-error/30 text-xs font-bold uppercase tracking-widest transition-colors">
+                    Emergency Shutdown
+                </button>
+<div class="flex justify-between text-on-surface-variant text-[10px] font-label-caps pt-4 border-t border-white/5">
+<div class="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">help</span> SUPPORT
+                    </div>
+<div class="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">terminal</span> LOGS
+                    </div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-8 relative">
+<!-- Background Decoration -->
+<div class="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
+
+</div>
+<div class="max-w-7xl mx-auto space-y-6 relative z-10">
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-display-lg font-bold tracking-tight text-on-surface">Acoustic Anomaly Ledger</h1>
+<p class="text-on-surface-variant text-sm mt-1">Real-time telemetry analysis from 450 network sensors • <span class="text-error font-semibold">24 Open Events</span></p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 glass-panel hover:bg-white/10 text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Export CSV
+                        </button>
+<button class="px-4 py-2 bg-primary-container hover:bg-blue-600 text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span> Acknowledge Selected
+                        </button>
+</div>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="glass-panel p-4 rounded-lg flex items-center justify-between">
+<div>
+<p class="text-label-caps text-on-surface-variant opacity-60">MICRO-LEAKS</p>
+<h2 class="text-2xl font-bold mt-1">14</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500">
+<span class="material-symbols-outlined">water_lux</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg flex items-center justify-between">
+<div>
+<p class="text-label-caps text-on-surface-variant opacity-60">WATER HAMMER</p>
+<h2 class="text-2xl font-bold mt-1">06</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-warning/10 flex items-center justify-center text-warning">
+<span class="material-symbols-outlined">waves</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg flex items-center justify-between">
+<div>
+<p class="text-label-caps text-on-surface-variant opacity-60">CAVITATION</p>
+<h2 class="text-2xl font-bold mt-1">04</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">air</span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg border-error/30 bg-error/5 flex items-center justify-between">
+<div>
+<p class="text-label-caps text-error opacity-80">UNRESOLVED CRITICAL</p>
+<h2 class="text-2xl font-bold mt-1 text-error">03</h2>
+</div>
+<div class="w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="glass-panel rounded-lg p-3 flex flex-wrap items-center gap-4">
+<div class="flex items-center gap-2 flex-1 min-w-[200px]">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none text-sm focus:ring-0 w-full placeholder:text-outline/50" placeholder="Filter by ID or Zone..." type="text">
+</div>
+<div class="h-6 w-px bg-white/10 mx-2 hidden lg:block"></div>
+<select class="bg-surface-container-high border-none text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded cursor-pointer focus:ring-1 focus:ring-primary">
+<option>Type: All</option>
+<option>Micro-Leak</option>
+<option>Water Hammer</option>
+<option>Cavitation</option>
+</select>
+<select class="bg-surface-container-high border-none text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded cursor-pointer focus:ring-1 focus:ring-primary">
+<option>Status: Open</option>
+<option>Acknowledged</option>
+<option>Resolved</option>
+</select>
+<select class="bg-surface-container-high border-none text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded cursor-pointer focus:ring-1 focus:ring-primary">
+<option>Range: 24 Hours</option>
+<option>7 Days</option>
+<option>30 Days</option>
+</select>
+<button class="ml-auto p-1.5 hover:bg-white/10 rounded transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">refresh</span>
+</button>
+</div>
+<!-- Data Table -->
+<div class="glass-panel rounded-lg overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead>
+<tr class="bg-white/5 border-b border-white/10">
+<th class="px-6 py-3 w-10"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant">DEVICE ID</th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant">ZONE / ADDRESS</th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant">ANOMALY TYPE</th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant">FREQUENCY RANGE</th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant text-right">CONFIDENCE</th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant">DETECTED AT</th>
+<th class="px-4 py-3 text-label-caps text-on-surface-variant">STATUS</th>
+<th class="px-4 py-3"></th>
+</tr>
+</thead>
+<tbody class="text-sm font-body-md divide-y divide-white/5">
+<!-- Row 1: Critical -->
+<tr class="hover:bg-white/[0.02] transition-colors critical-pulse bg-error/5 group">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-error">HT-4F2A</td>
+<td class="px-4 py-4">
+<div class="font-semibold">Ward 12 - Kothrud</div>
+<div class="text-[10px] text-on-surface-variant">Main Trunk, 400m from Substation A</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-error/20 text-error text-[10px] font-bold uppercase tracking-wide border border-error/30">Water Hammer</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">850 Hz - 2.2 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono font-bold text-error">98.4%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 09:12:44</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Open</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-error/20 text-error rounded transition-all active:scale-95 group-hover:bg-error/10">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-white/[0.02] transition-colors bg-warning/5">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-warning">HT-99B1</td>
+<td class="px-4 py-4">
+<div class="font-semibold">Ward 08 - Baner</div>
+<div class="text-[10px] text-on-surface-variant">Pashan Road Secondary Line</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-warning/20 text-warning text-[10px] font-bold uppercase tracking-wide border border-warning/30">Micro-Leak</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">70 Hz - 1.5 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono text-on-surface">82.1%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 08:45:12</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-warning">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Acknowledged</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Standard -->
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-primary">HT-12C8</td>
+<td class="px-4 py-4">
+<div class="font-semibold">Ward 15 - Shivajinagar</div>
+<div class="text-[10px] text-on-surface-variant">JM Road Commercial Sector</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-wide border border-primary/30">Cavitation</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">1.2 kHz - 4.0 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono text-on-surface">64.5%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 07:30:01</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Open</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Resolved -->
+<tr class="hover:bg-white/[0.02] transition-colors opacity-60 grayscale-[0.5]">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-on-surface-variant">HT-55D4</td>
+<td class="px-4 py-4">
+<div class="font-semibold text-on-surface-variant">Ward 12 - Kothrud</div>
+<div class="text-[10px]">Paud Road Junction</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-white/5 text-on-surface-variant text-[10px] font-bold uppercase tracking-wide border border-white/10">Micro-Leak</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">110 Hz - 900 Hz</td>
+<td class="px-4 py-4 text-right font-data-mono">92.0%</td>
+<td class="px-4 py-4 text-xs">Oct 24, 05:15:22</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Resolved</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all">
+<span class="material-symbols-outlined text-lg">history</span>
+</button>
+</td>
+</tr>
+<!-- Additional Data Rows -->
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-primary">HT-7A23</td>
+<td class="px-4 py-4">
+<div class="font-semibold">Ward 08 - Baner</div>
+<div class="text-[10px] text-on-surface-variant">Balewadi High Street Corner</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-wide border border-primary/30">Cavitation</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">1.5 kHz - 3.8 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono">71.8%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 04:45:11</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Open</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+</td>
+</tr>
+<!-- Repeat structure for more rows to reach 12 -->
+<tr class="hover:bg-white/[0.02] transition-colors bg-warning/5">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-warning">HT-22F0</td>
+<td class="px-4 py-4">
+<div class="font-semibold">Ward 15 - Shivajinagar</div>
+<div class="text-[10px] text-on-surface-variant">University Circle Feed</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-warning/20 text-warning text-[10px] font-bold uppercase tracking-wide border border-warning/30">Micro-Leak</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">65 Hz - 1.2 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono text-on-surface">54.2%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 03:20:55</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-warning">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Acknowledged</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors critical-pulse bg-error/5">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-error">HT-88E2</td>
+<td class="px-4 py-4">
+<div class="font-semibold">Ward 08 - Baner</div>
+<div class="text-[10px] text-on-surface-variant">Main Line S-Curve</div>
+</td>
+<td class="px-4 py-4">
+<span class="px-2 py-0.5 rounded bg-error/20 text-error text-[10px] font-bold uppercase tracking-wide border border-error/30">Water Hammer</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-xs">920 Hz - 2.5 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono text-error font-bold">96.7%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 02:12:00</td>
+<td class="px-4 py-4">
+<span class="flex items-center gap-1.5 text-error">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Open</span>
+</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all">
+<span class="material-symbols-outlined text-lg">analytics</span>
+</button>
+</td>
+</tr>
+<!-- 5 More generic rows to fill to 12 -->
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-primary">HT-33A1</td>
+<td class="px-4 py-4"><div class="font-semibold">Ward 12 - Kothrud</div><div class="text-[10px] text-on-surface-variant">Ideal Colony Road</div></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">Cavitation</span></td>
+<td class="px-4 py-4 font-data-mono text-xs">1.0 kHz - 3.5 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono">45.2%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 24, 01:05:30</td>
+<td class="px-4 py-4"><span class="text-primary text-[10px] font-bold uppercase tracking-widest">Open</span></td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all"><span class="material-symbols-outlined text-lg">analytics</span></button>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors opacity-60">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold">HT-44C9</td>
+<td class="px-4 py-4"><div class="font-semibold">Ward 15 - Shivajinagar</div><div class="text-[10px]">FC Road Intersection</div></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-bold border border-white/10">Micro-Leak</span></td>
+<td class="px-4 py-4 font-data-mono text-xs">80 Hz - 1.1 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono">88.3%</td>
+<td class="px-4 py-4 text-xs">Oct 23, 23:45:00</td>
+<td class="px-4 py-4"><span class="text-[10px] font-bold uppercase tracking-widest">Resolved</span></td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all"><span class="material-symbols-outlined text-lg">history</span></button>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-warning">HT-11B0</td>
+<td class="px-4 py-4"><div class="font-semibold">Ward 08 - Baner</div><div class="text-[10px] text-on-surface-variant">Sakal Nagar Feed</div></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded bg-warning/20 text-warning text-[10px] font-bold border border-warning/30">Micro-Leak</span></td>
+<td class="px-4 py-4 font-data-mono text-xs">90 Hz - 1.3 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono">61.0%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 23, 22:15:10</td>
+<td class="px-4 py-4"><span class="text-warning text-[10px] font-bold uppercase tracking-widest">Acknowledged</span></td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all"><span class="material-symbols-outlined text-lg">analytics</span></button>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-primary">HT-09X2</td>
+<td class="px-4 py-4"><div class="font-semibold">Ward 12 - Kothrud</div><div class="text-[10px] text-on-surface-variant">Karve Road Bypass</div></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold border border-primary/20">Water Hammer</span></td>
+<td class="px-4 py-4 font-data-mono text-xs">1.1 kHz - 2.8 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono">59.9%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 23, 21:00:44</td>
+<td class="px-4 py-4"><span class="text-primary text-[10px] font-bold uppercase tracking-widest">Open</span></td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all"><span class="material-symbols-outlined text-lg">analytics</span></button>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors bg-warning/5">
+<td class="px-6 py-4"><input class="rounded border-outline-variant bg-transparent text-primary focus:ring-primary" type="checkbox"></td>
+<td class="px-4 py-4 font-data-mono font-bold text-warning">HT-66G5</td>
+<td class="px-4 py-4"><div class="font-semibold">Ward 15 - Shivajinagar</div><div class="text-[10px] text-on-surface-variant">Congress House Area</div></td>
+<td class="px-4 py-4"><span class="px-2 py-0.5 rounded bg-warning/20 text-warning text-[10px] font-bold border border-warning/30">Micro-Leak</span></td>
+<td class="px-4 py-4 font-data-mono text-xs">75 Hz - 1.4 kHz</td>
+<td class="px-4 py-4 text-right font-data-mono text-on-surface">78.5%</td>
+<td class="px-4 py-4 text-xs text-on-surface-variant">Oct 23, 20:30:11</td>
+<td class="px-4 py-4"><span class="text-warning text-[10px] font-bold uppercase tracking-widest">Acknowledged</span></td>
+<td class="px-4 py-4 text-right">
+<button class="p-2 hover:bg-white/10 text-on-surface-variant rounded transition-all"><span class="material-symbols-outlined text-lg">analytics</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 bg-white/[0.02] border-t border-white/10 flex items-center justify-between">
+<p class="text-xs text-on-surface-variant">Showing <span class="font-bold text-on-surface">12</span> of <span class="font-bold text-on-surface">124</span> incidents</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-high text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-high text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-high text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all font-bold text-xs">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-high text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all font-bold text-xs">11</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface-container-high text-on-surface-variant hover:bg-primary/20 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast / Urgent Alert Overlay (Bottom Right) -->
+<div class="fixed bottom-8 right-8 z-50 animate-bounce cursor-pointer">
+<div class="glass-panel p-4 rounded-xl border-error bg-error/10 flex items-center gap-4 shadow-lg shadow-error/20">
+<div class="w-10 h-10 rounded-full bg-error flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h4 class="text-xs font-bold text-error uppercase tracking-widest">New Critical Event</h4>
+<p class="text-xs text-on-surface">Potential burst detected at HT-29Z1 (Kothrud)</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction JS -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (e.target.type !== 'checkbox') {
+                    const checkbox = row.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                    row.classList.toggle('bg-primary/5', checkbox.checked);
+                }
+            });
+        });
+
+        // Simulating live data update every 30 seconds
+        setInterval(() => {
+            console.log("AQUAGUARD OPS: Refreshing sensor telemetry...");
+            // Real implementation would fetch and update table rows
+        }, 30000);
+    </script>
+</body></html>
